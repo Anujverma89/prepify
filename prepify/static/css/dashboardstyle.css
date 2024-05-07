@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to bottom, #072c65, #113674, #194183, #214c92, #2858a2);
+}
+
+#dashboard-container {
+    max-width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: linear-gradient(to top, #81b2fa, #a1c4fc, #bfd7fd, #dceafe, #fafcff);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard{
+    margin-top: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.tot-tests{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avg-accuracy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback-for-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
