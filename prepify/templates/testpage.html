@@ -1,0 +1,228 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/testpagestyle.css' %}">
+    <script type="text/javascript" src="{% static 'js/taketest.js'%}"></script>
+    <title>Take Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+</head>
+
+<body>
+    {% if existingAnswer == None %}
+        <div id="quiz-container">
+            <div class="mikeCicleContainer">
+                <div class="mikeIconContainer" id="mikeIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                        <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+                        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="timer">
+                <div class="clock">
+                    <div class="minute">
+                        <h6><span id="minute">00</span>:</h6>
+                    </div>
+                    <div class="second">
+                        <h6><span id="second">00</span></h6>
+                    </div>
+                </div>
+            </div>
+            <h1>Question</h1>
+            <div id="questionBox">
+                <select name="question" id="question">
+                    {% for q in question %}
+                    <option value={{q}}>{{q}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <video autoplay muted playsinline controls class="videotab" id="videotab"></video>
+            <div class="buttons">
+                <button id="record-answer" onclick="recordVideo()">Start Test</button>
+                <button id="stop-recording" onclick="startProcessing()" hidden>Start Analysis</button>
+                
+                <!-- <button id="skip-question">Skip Question</button> -->
+            </div>
+        </div>
+        <div class="displayNone" id="output">
+            
+        </div>
+
+        <div class="resultTab displayNone" id="resultTab">
+            <div>Analysis Report</div>
+            <div class="anserText" id="anserText"></div>
+        </div>
+        
+    
+        <div class="departmentContainer" id="departmentContainer">
+            <div class="timesExitDepartment" onclick="exitSelection()">
+            <h3>&times;</h3>
+            </div>
+            <h1 class="identificationText" id="identificationText">Select Department</h1>
+            <div class="departmentoptinos" id="departmentoptinos">
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Computer Science</p>
+                </div>
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Civil</p>
+                </div>
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Electrical</p>
+                </div>
+                <div class="department" onclick="nextMove()">
+                    <div class="circle"></div>
+                    <p>Artificial Intelligence</p>
+                </div>
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Mechanical</p>
+                </div>
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Electronics</p>
+                </div>
+                <div class="department">
+                    <div class="circle"></div>
+                    <p>Data Science</p>
+                </div>
+            </div>
+            <div class="selectTestType displayNone" id="selectTestType" >
+                <div class="optionText" onclick="openTest(this)" data-type="Mock">Mock Interview</div>
+                <div class="optionText" onclick="openTest(this)" data-type="Apt">Aptitute MCQS</div>
+                <div class="optionText" onclick="openTest(this)" data-type="Tech">Technical MCQS</div>
+            </div>
+        </div>
+
+
+        <div class="processing displayNone" id="processingBox">
+            <div class="processingCircle">
+                <div class="processingCircleBox">
+                    Analysing Your Answer <br><b>Please Wait ...</b>
+                </div>
+            </div>
+        </div>
+       
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <input type="text" id="loginIdentifer" hidden>
+    {% endif %}
+    <button id="processanswer" hidden></button>
+    <button id="buttonExisting" hidden>existingbutton</button>
+    {% if existingAnswer == "Yes" %}
+        <section class="existingAnswer">
+            <div class="context" id="existingContext">
+                
+            </div>
+            <div class="givenAnswer" id="exestingAnswer">
+              
+            </div>
+            <div class="analysisReport" id="analysisReport">
+
+            </div>
+            <div class="processingText" id="processingText">
+                <h3>Analysing Answer !!</h3>
+                <h4>Please Wait ...</h4>
+            </div>
+            <div class="testAgain displayNone" id="testAgain">
+                <a href="/">
+                    <button>Take Test</button>
+                </a>
+            </div>
+            <script>
+                    document.getElementById("existingContext").innerText= localStorage.getItem("context");
+                    document.getElementById("exestingAnswer").innerText= localStorage.getItem("AnswerText");
+            </script>
+        </section>
+    {% endif %}
+    
+    <script type="module">
+        let isAnswer = 0;
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+        let btn = document.getElementById("processanswer");
+        let output = document.getElementById("output");
+        let resultDiv = document.getElementById("anserText");
+        let context = document.getElementById("question");
+        btn.addEventListener("click", async ()=>{
+            document.getElementById("processingBox").classList.remove("displayNone")
+            let answer = output.innerText;
+            var selectedIndex = context.selectedIndex;
+            var selectedOption = context.options[selectedIndex];
+            var selectedcontext = selectedOption.label;
+            let prompt = `Analayse this given answer,  answer = ${answer}, compare with the correct answer of the given context context = ${selectedcontext} return accuracy score of given answer, return the correct answer`;
+            const api_key = "AIzaSyCDe71sIPmYEIFgYDJ_hiD_nW2vIJmiWNg";
+            const genAI = new GoogleGenerativeAI(api_key);
+            const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+            const result = await model.generateContentStream(prompt);
+            const response = await result.response;
+            let text = '';
+            for await (const chunk of result.stream) {
+                if(isAnswer === 0){
+                    document.getElementById("processingBox").classList.add("displayNone")
+                    document.getElementById("resultTab").classList.remove("displayNone");
+                    isAnswer=1;
+                }
+                const chunkText = chunk.text();
+                text += chunkText;
+                resultDiv.innerText = text;
+            }
+            saveResponse(text, selectedcontext);
+        })
+
+        let existingbtn = document.getElementById("buttonExisting");
+        existingbtn.addEventListener("click", async()=>{
+            let newAnalysis = document.getElementById("analysisReport");
+            let answer = localStorage.getItem("AnswerText");
+            var selectedcontext =  localStorage.getItem("context");
+            let prompt = `Analayse this given answer,  answer = ${answer}, compare with the correct answer of the given context context = ${selectedcontext} return accuracy score of given answer, return the correct answer`;
+            const api_key = "AIzaSyCDe71sIPmYEIFgYDJ_hiD_nW2vIJmiWNg";
+            const genAI = new GoogleGenerativeAI(api_key);
+            const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+            const result = await model.generateContentStream(prompt);
+            const response = await result.response;
+            let text = '';
+            for await (const chunk of result.stream) {
+                document.getElementById("processingText").classList.add("displayNone");
+                document.getElementById("testAgain").classList.remove("displayNone")
+                const chunkText = chunk.text();
+                text += chunkText;
+                newAnalysis.innerText = text;
+            }
+            saveResponse(text, selectedcontext);
+        });
+        document.getElementById("buttonExisting").click();
+
+        function saveResponse(answer, question){
+            let xml = new XMLHttpRequest();
+            let formdta = new FormData();
+            formdta.append("answer",answer);
+            formdta.append("question",question);
+            xml.open("POST","saveresult",true);
+            xml.onreadystatechange = function() {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    console.log(xml.responseText);
+                }
+            };
+            xml.send(formdta);
+        }
+    </script>
+
+</body>
+</html>

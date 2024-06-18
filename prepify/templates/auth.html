@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{% static 'assets/prepify_favicon.png' %}">
+
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script type="text/javascript" src="{% static 'js/auth.js' %}"></script>
+    <title>Lignup - Welcome To Prepify....</title>
+</head>
+<body>  
+    <div class="auth-container">
+        {{message}}
+        <div class="login-container">
+            <div class="heading">
+                <h4 style="text-align: center;">Prepify</h4>
+                <p style="font-style: italic;">The only guide you need !!</p>
+            </div>
+            <div class="linetop">
+
+            </div>
+            <form class="login-form" id="LoginForm" action="/login"  method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter username..." required>
+                <input type="password" name="password" placeholder="Enter password..." required>
+                <button class="btn-danger" type="submit">Login</button>
+            </form>
+
+            <form class="signup-form hidden_form" action="signup" id="SignupForm" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter username..." required>
+                <input type="email" name="useremail" placeholder="Enter Email..." required>
+                <input type="tel" name="contact" placeholder="Contact no..." required>
+                <select type="text" name="department" required>
+                    <option value="aiml">(AI-ML) Engineering</option>
+                    <option value="cse">Computer Science Engineering</option>
+                    <option value="electrical">Electrical Engineering</option>
+                    <option value="mech">Mechanical Engineering</option>
+                    <option value="electronic">Electronics Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                </select>
+                <select type="text" name="year" required>
+                    <option value="fy">First Year</option>
+                    <option value="sy">Second Year</option>
+                    <option value="ty">Third Year</option>
+                    <option value="final">Final Year</option>
+                </select>
+                <input type="password" name="password" placeholder="Enter Password..." required>
+                <input type="password" name="confpassword" placeholder="Confirm Password..." required>
+                <input type="text" name="context" id="questionfield"  hidden>
+                <input type="text" name="answer" id="answerfield"  hidden>
+                <button class="btn-danger" type="submit">Signup</button>
+            </form>
+            <div class="linebottom">
+
+            </div>
+            <div class="form_bottom">
+                <small><span class="openSignup" onclick="opensignUpform()" style="color: blue; cursor: pointer;" id="clicktoopentext">SignUp</span> </small>
+                <p>OR</p>
+                <p>Login with</p>
+                <div class="login_with_icon_continer" style="color: blue;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                        <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let question = localStorage.getItem("context");
+        let answer = localStorage.getItem("AnswerText");
+        if(localStorage.getItem("context")){
+            let inp = document.createElement("input");
+            inp.setAttribute("type","text");
+            inp.setAttribute("hidden",true);
+            inp.setAttribute("name","checkvalue");
+            inp.setAttribute("value",1);
+            let inpt = document.createElement("input");
+            inpt.setAttribute("type","text");
+            inpt.setAttribute("hidden",true);
+            inpt.setAttribute("name","checkvalue");
+            inpt.setAttribute("value",1);
+            document.getElementById("LoginForm").appendChild(inp);
+            document.getElementById("SignupForm").appendChild(inpt);
+        }
+    </script>
+</body>
+</html>

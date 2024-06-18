@@ -1,0 +1,128 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.heading{
+    margin-bottom: 20px;
+    position: relative;
+    top: -20px;
+}
+.heading h4{
+    margin-bottom: 10px;
+}
+
+.linetop{
+    height: .5px;
+    width: 100%;
+    background-color: red;
+    position: relative;
+    top: -22px;
+}
+.linebottom{
+    margin-top: 30px;
+    height: .5px;
+    width: 100%;
+    background-color: black;
+    position: relative;
+    top: 10px;
+}
+
+.auth-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-container{
+    box-shadow: 0px 0px 2px  gray;
+    padding: 40px;
+    border-radius: 5px;
+    
+}
+input,select{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
+    border: inset 2px;
+    border-color: black;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+}
+select{
+    height: 34px;
+    width: 102%;
+}
+
+.form_input{
+    padding-block: 0px;
+    padding-inline:0px ;
+}
+
+button{
+    padding: 5px 30px 5px 30px;
+    background-color: red;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.form_bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 5px;
+}
+.login_with_icon_continer{
+    height: 35px;
+    width: 35px;
+    background-color: white;
+    box-shadow: 0px 0px 2px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+}
+.login_with_icon_continer:hover{
+    box-shadow: none;
+
+}
+
+
+input::placeholder, select{
+    color: cornflowerblue;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.login-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.signup-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.hidden_form{
+    display: none;
+}

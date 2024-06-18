@@ -1,0 +1,154 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboardstyle.css'%}">
+    <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div id="dashboard-container" class="dashboardContainer">
+        
+        <div class="top-bar">
+            <div class="logoutContainer">
+                <a href="logout" style="cursor: pointer;">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
+                        Logout
+                    </button>
+                </a>
+            </div>
+        </div>
+       
+        <div class="side-pannel">
+            <div class="home_icon">
+                <img src="{% static '/assets/prepify_logo.png'%}" alt="logo_image" onclick="goToHome()">
+            </div>
+            <div class="taketest" onclick="expandDiv()" id="expandDiv">
+                <div class="token_click">Take Test</div>
+                <li onclick="openMock()">Mock Interview</li>
+                <li onclick="openApt()">Aptitude</li>
+                <li onclick="openCod()">Coding</li>
+                <li onclick="openWri()">Written</li>
+            </div>
+            <!-- <div class="token_click"  onclick="showRank()">Global Rank</div> -->
+            <!-- <div class="token_click" onclick="showUserProfile()">User Profile</div> -->
+            <div class="token_click" onclick="scoreBoard()">Past Results</div>
+        </div>
+
+        <div class="data_card" id="rank">
+            <img src="{% static 'assets/ranking.png' %}" height="100" alt="rank_image">
+            <h1>100</h1>
+        </div>
+        <div class="hiddenCard" id="profilecard">
+            {{user}}
+        </div>
+        <div class="hiddenCard" id="scoreCard">
+            <!-- <div class="matrics">
+                <div class="meter">
+                </div>
+            </div>
+            <div class="types">
+                <button>Coding</button>
+                <button>MocK</button>
+                <button>Aptitude</button>
+                <button>Written</button>
+            </div> -->
+            
+        </div>
+    </div>
+
+    <script>
+        function expandDiv(){
+            let doc = document.getElementById("expandDiv");
+            // doc.style.height='200px';
+            doc.classList.toggle("newtaketest");
+            console.log(doc)
+        }
+        function openMock(){
+            window.location.href="/taketest";
+        }
+        function openApt(){
+            window.open("https://www.interviewbit.com/", '_blank').focus();
+        }
+        function openCod(){
+            window.open(" https://www.hackerrank.com/", '_blank').focus();
+        }
+        function openWri(){
+            window.open("https://www.interviewbit.com/", '_blank').focus();
+        }
+        let rank = document.getElementById("rank");
+        let profile = document.getElementById("profilecard");
+        let scorecard = document.getElementById("scoreCard");
+        function showRank(){
+            rank.classList.add("data_card");
+            rank.classList.remove("hiddenCard");
+            if(profile.classList.contains("data_card")){
+                profile.classList.remove("data_card");
+                profile.classList.add("hiddenCard");
+            }else if(scorecard.classList.contains("data_card")){
+                scorecard.classList.remove("data_card");
+                scorecard.classList.add("hiddenCard");
+            }
+        }
+        function showUserProfile(){
+            profile.classList.add("data_card");
+            profile.classList.remove("hiddenCard");
+            if(rank.classList.contains("data_card")){
+                rank.classList.remove("data_card");
+                rank.classList.add("hiddenCard");
+            }else if(scorecard.classList.contains("data_card")){
+                scorecard.classList.remove("data_card");
+                scorecard.classList.add("hiddenCard");
+            }
+        }
+        function scoreBoard(){
+            scorecard.classList.add("data_cardscore");
+            scorecard.classList.remove("hiddenCard");
+            if(profile.classList.contains("data_card")){
+                profile.classList.remove("data_card");
+                profile.classList.add("hiddenCard");
+            }else if(rank.classList.contains("data_card")){
+                rank.classList.remove("data_card");
+                rank.classList.add("hiddenCard");
+            }
+            requestResult()
+        }
+        function goToHome(){
+            window.location.href = "/";
+        }
+
+        function requestResult(){
+            let xml = new XMLHttpRequest();
+            xml.open("GET","pastresults",true);
+            xml.onreadystatechange = function() {
+                if (xml.readyState == 4 && xml.status == 200) {
+                    var responseData = JSON.parse(xml.responseText);
+                    let prnt = document.getElementById("scoreCard");
+                    for(let o of responseData){
+                        let child = document.createElement("div");
+                        child.setAttribute("class","questionansercard");
+                        let question = document.createElement("div");
+                        let anser = document.createElement("div");
+                        question.innerText = o.question;
+                        anser.innerText = o.answer;
+                        child.appendChild(question);
+                        child.appendChild(anser);
+                        prnt.appendChild(child)
+                    }
+                }
+            };
+            xml.send();
+        }
+    </script>
+</body>
+
+</html>

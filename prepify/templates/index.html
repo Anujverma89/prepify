@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{% static 'assets/prepify_favicon.png' %}">
+    <title>Prepify - Your Preparation companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <div class="main">
+        <div class="side-bar">
+            <div class="navigation">
+                <div class="logo"> 
+                    <img src="{% static 'assets/prepify_logo.png' %}" class="logo">
+                </div>
+                <div class="navigation-section">
+                    <div class="nav-options">
+                        <i class="fa-solid fa-house"></i>
+                        <a href="#">Home</a>
+                    </div>
+                    <div class="nav-options">
+                        <i class="fa-solid fa-address-card"></i>
+                        <a href="#aboutUs">About us</a>
+                    </div>
+                    <div class="nav-options">
+                        <i class="fa-solid fa-square-envelope"></i>
+                        <a href="#contactUs">Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="name-of-site">
+                    <p class="site-name">Prepify</p>
+                    <p class="site-quote">...The Skill Catalyst</p>
+                </div>
+                <div class="acc-options">
+                    <nav class="navbar">
+                        <div class="container-fluid justify-content-end">
+                            {% if user.is_authenticated %}
+                                <button class="btn btn-primary me-2"  onclick="openDashboard()"><i class="fa-solid fa-bars-progress"></i><span> </span>Dashboard</button>
+                            {% else %}
+                                <a href="/login"><button  class="btn btn-danger me-2">Login</button></a>
+                            {% endif%}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="welcome-section">
+                <div class="textual-info">
+                    <div class="myheading">
+                        <p>Welcome To Prepify....</p>
+                    </div>
+                    <div class="discription">
+                        <p>A groundbreaking artificial intelligence (AI) powered application designed to propel job
+                            seekers
+                            towards interview success.</p>
+                        <p>Speak your answers with confidence as our intelligent system meticulously analyzes every
+                            word,
+                            providing tailored feedback for your growth. Elevate your skills with real-time insights</p>
+                    </div>
+                    <div class="take-test-btn">
+                        <button type="button" class="btn btn-light" onclick="openTestWindow()">Take Test Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="aboutUs" id="aboutUs">
+        <h3>
+            Welcome to Prepify, where we bring the power of artificial intelligence to the realm of mock interviews. Our innovative software is designed to guide you through the challenging process of interview preparation, providing personalized feedback and suggesting optimal responses to help you ace your next interview.
+        </h3>
+
+        
+       <p>
+        At Prepify, we understand that preparing for an interview can be daunting. That's why we've developed a cutting-edge AI system that simulates real interview scenarios, allowing you to practice in a stress-free environment. Here's how it works:
+        
+        Mock Interviews: Start by selecting the type of interview you're preparing for, whether it's a job interview, college admissions interview, or any other scenario. Our AI algorithm then generates a series of questions tailored to that specific context.
+        
+        Real-Time Feedback: As you respond to each question, Prepify's AI analyzes your answers in real-time, evaluating factors such as clarity, confidence, and relevance. You'll receive instant feedback on your performance, highlighting areas for improvement and suggesting strategies to enhance your responses.
+        
+        Suggested Answers: Struggling to find the right words? No problem. Prepify offers a database of suggested answers for common interview questions, curated by industry experts and tailored to your specific needs. Whether you're tackling a tricky behavioral question or explaining your qualifications, our AI can help you craft compelling responses that leave a lasting impression.
+       </p>
+        
+        <h3>
+            Key Features:
+        </h3>
+        
+            <ul>
+                <li>
+                    Customized Practice: With Prepify, you can customize your practice sessions to focus on the areas where you need the most improvement. Whether it's communication skills, problem-solving abilities, or industry-specific knowledge, our AI adapts to your unique strengths and weaknesses.
+                </li>
+                <li>
+                    Interview Analytics: Track your progress over time with detailed analytics that measure your performance across different interview categories. Identify trends, set goals, and monitor your growth as you work towards mastering the art of interviewing.
+                </li>
+                <li>
+                    Accessibility: Prepify is accessible anytime, anywhere, allowing you to practice interviews on your own schedule from the comfort of your own home. Whether you're a seasoned professional or a first-time interviewee, our user-friendly interface makes it easy to get started and stay motivated.
+                </li>
+            </ul>
+        
+       <h3>
+            Why Choose Prepify?
+       </h3>
+        <ul>
+            <li>Expert Guidance: Our team of experienced interview coaches and AI specialists have combined their expertise to create a platform that delivers unparalleled guidance and support throughout your interview preparation journey.</li>
+            <li>Confidence Boost: By practicing with Prepify, you'll gain the confidence and skills you need to approach any interview with poise and professionalism. Whether you're aiming for your dream job or seeking admission to your top-choice school, we'll help you put your best foot forward.</li>
+            <li>Continuous Improvement: At Prepify, we're committed to ongoing innovation and improvement. We regularly update our AI algorithms and content library to ensure that our users have access to the most up-to-date resources and strategies for interview success.</li>
+            <li>Don't leave your interview success to chance. Take control of your preparation with Prepify and unlock your full potential. Sign up today and experience the difference that AI-powered mock interviews can make!</li>
+        </ul>
+    </div>
+    <div class="contactUs" id="contactUs">
+        <h1>Developer's Team</h1>
+        <div class="internalDiv">
+            <div class="developer">
+                <p>Anuj Verma</p>
+                <p>B-Tech CSE-AI</p>
+                <p>Third Year</p>
+            </div>
+            <div class="developer">
+                <p>Manjusha Gore</p>
+                <p>B-Tech CSE-AI</p>
+                <p>Third Year</p>
+            </div>
+            <div class="developer">
+                <p>Shreyash Chavan</p>
+                <p>B-Tech CSE-AI</p>
+                <p>Third Year</p>
+            </div>
+        </div>
+        <div class="hrrow"></div>
+        <div class="projectGuide">
+            <h1 style="text-align: center;">Project Guide</h1>
+            <div style="text-align: center; margin-top: 20px;">
+                <h3>PROF. SAMBHAJI D. RANE</h3>
+                <p>Qualification: B.E., M.E.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
