@@ -36,7 +36,7 @@ function doInitialSetUp(){
             }
         }
 
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+        if(window.navigator.mediaDevices && window.navigator.mediaDevices.getUserMedia){
             let videotab = document.getElementById("videotab");
             let audiotab = document.getElementById("audiotab");
             navigator.mediaDevices.getUserMedia({video:true,audio:true}).
