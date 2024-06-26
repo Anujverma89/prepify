@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 import speech_recognition as sr
 import os
 from django.views.decorators.csrf import csrf_exempt
-from .models import TestRecord
+from .models import TestRecord, Question
 
 from .models import Question
 # Create your views here.
@@ -147,9 +147,31 @@ def pastresult(request):
     res=[]
     for r in result:
         dic={}
+        dic["id"]=r.id
         dic["question"] = r.question
         dic["answer"] = r.answer
         res.append(dic)
     print(len(res))
     return JsonResponse(res, status=200, safe=False)
     # return HttpResponse(result)
+
+@csrf_exempt
+def savequestion(request):
+    if request.method == "POST":
+        qdata = request.POST["addquestion"]
+        qtype = request.POST["questiontype"]
+        Question.objects.create(question_type=qtype,question_text=qdata)
+        return HttpResponse("Question save successfully!!")
+    else:
+        return HttpResponse("You are trying to access it wrong")
+
+@csrf_exempt
+def delteRec(request):
+    if request.method == "POST":
+        recid=request.POST["id"]
+        record = TestRecord.objects.get(pk=recid)
+        print(record)
+        record.delete()
+        return HttpResponse("SUccess full")
+    else:
+        return HttpResponse("this rounte is not available")

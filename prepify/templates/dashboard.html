@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/dashboardstyle.css'%}">
     <script type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
     <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
     <div id="dashboard-container" class="dashboardContainer">
-        
         <div class="top-bar">
             <div class="logoutContainer">
                 <a href="logout" style="cursor: pointer;">
@@ -26,9 +26,20 @@
                     </button>
                 </a>
             </div>
+            <div class="dropDownDashboard" onclick="openNavigation()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                    <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082"/>
+                </svg>
+            </div>
         </div>
-       
-        <div class="side-pannel">
+        <div class="side-pannel" id="sidepannel">
+            <div class="dropDownDashboardpannel" onclick="openNavigation()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                    <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082"/>
+                </svg>
+            </div>
             <div class="home_icon">
                 <img src="{% static '/assets/prepify_logo.png'%}" alt="logo_image" onclick="goToHome()">
             </div>
@@ -39,14 +50,11 @@
                 <li onclick="openCod()">Coding</li>
                 <li onclick="openWri()">Written</li>
             </div>
-            <!-- <div class="token_click"  onclick="showRank()">Global Rank</div> -->
-            <!-- <div class="token_click" onclick="showUserProfile()">User Profile</div> -->
-            <div class="token_click" onclick="scoreBoard()">Past Results</div>
+            <div class="pastresults" onclick="scoreBoard()">Past Results</div>
         </div>
 
         <div class="data_card" id="rank">
-            <img src="{% static 'assets/ranking.png' %}" height="100" alt="rank_image">
-            <h1>100</h1>
+            <img src="{% static 'assets/ranking.png' %}" height="50" alt="rank_image">
         </div>
         <div class="hiddenCard" id="profilecard">
             {{user}}
@@ -62,7 +70,6 @@
                 <button>Aptitude</button>
                 <button>Written</button>
             </div> -->
-            
         </div>
     </div>
 
@@ -75,14 +82,18 @@
         }
         function openMock(){
             window.location.href="/taketest";
+            openNavigation()
         }
         function openApt(){
+            openNavigation()
             window.open("https://www.interviewbit.com/", '_blank').focus();
         }
         function openCod(){
+            openNavigation()
             window.open(" https://www.hackerrank.com/", '_blank').focus();
         }
         function openWri(){
+            openNavigation()
             window.open("https://www.interviewbit.com/", '_blank').focus();
         }
         let rank = document.getElementById("rank");
@@ -110,6 +121,7 @@
                 scorecard.classList.add("hiddenCard");
             }
         }
+
         function scoreBoard(){
             scorecard.classList.add("data_cardscore");
             scorecard.classList.remove("hiddenCard");
@@ -121,7 +133,9 @@
                 rank.classList.add("hiddenCard");
             }
             requestResult()
+            openNavigation()
         }
+
         function goToHome(){
             window.location.href = "/";
         }
@@ -137,10 +151,16 @@
                         let child = document.createElement("div");
                         child.setAttribute("class","questionansercard");
                         let question = document.createElement("div");
+                        let del = document.createElement("div");
+                        del.innerHTML = "<i class='material-icons'>delete</i>";
+                        del.setAttribute("onclick","deleteItem(this)")
+                        del.setAttribute("class","deleteitem");
+                        del.setAttribute("data-id",o.id);
                         let anser = document.createElement("div");
                         question.innerText = o.question;
                         anser.innerText = o.answer;
                         child.appendChild(question);
+                        child.appendChild(del);
                         child.appendChild(anser);
                         prnt.appendChild(child)
                     }

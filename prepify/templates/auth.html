@@ -16,7 +16,9 @@
 </head>
 <body>  
     <div class="auth-container">
-        {{message}}
+        <div class="messagebox" id="messagebox">
+            {{message}}
+        </div>
         <div class="login-container">
             <div class="heading">
                 <h4 style="text-align: center;">Prepify</h4>
@@ -51,11 +53,11 @@
                     <option value="ty">Third Year</option>
                     <option value="final">Final Year</option>
                 </select>
-                <input type="password" name="password" placeholder="Enter Password..." required>
-                <input type="password" name="confpassword" placeholder="Confirm Password..." required>
+                <input type="password" name="password" placeholder="Enter Password..." required id="pass" oninput="checkPassword()">
+                <input type="password" name="confpassword" placeholder="Confirm Password..." required id="cpass" oninput="checkPassword()">
                 <input type="text" name="context" id="questionfield"  hidden>
                 <input type="text" name="answer" id="answerfield"  hidden>
-                <button class="btn-danger" type="submit">Signup</button>
+                <button id="submitbutn"  class="btn-danger submitbtn" type="submit" disabled>Signup</button>
             </form>
             <div class="linebottom">
 
@@ -90,6 +92,7 @@
             document.getElementById("LoginForm").appendChild(inp);
             document.getElementById("SignupForm").appendChild(inpt);
         }
+        
     </script>
 </body>
 </html>

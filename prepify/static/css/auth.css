@@ -126,3 +126,24 @@ input::placeholder, select{
 .hidden_form{
     display: none;
 }
+
+.messagebox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: fit-content;
+    margin-bottom: 20px;
+    padding:0px 20px 0px 20px;
+}
+.displaynone{
+    display: none;
+}
+
+.submitbtn{
+    background-color: gray;
+}
+
+.activebutton{
+    background-color: red;
+}

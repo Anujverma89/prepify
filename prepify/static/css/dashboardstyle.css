@@ -80,7 +80,7 @@ a{
     margin-top: 20px;
     cursor: pointer;
     transition: .5s ease-in;
-    width: 100%;
+    width: 90%;
 }
 .taketest li{
     transition: .5s ease-in;
@@ -117,6 +117,15 @@ a{
     cursor: pointer;
     box-shadow: 0px 0px 4px gray;
 }
+.pastresults{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 90%;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px gray;
+}
 .data_card{
     height: 300px;
     width: 400px;
@@ -144,7 +153,7 @@ a{
     padding-bottom: 50px;
 }
 .questionansercard{
-    width: 100%;
+    width: 90%;
     max-height: fit-content;
     display: flex;
     justify-content: center;
@@ -155,6 +164,14 @@ a{
     box-sizing: border-box;
     flex-direction: column;
     padding: 50px;
+    max-width: 90%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+.questionansercard div{
+    max-width: 100%;
+    width: 90%;
 }
 .hiddenCard{
     display: none;
@@ -220,4 +237,85 @@ a{
     left: -7.5px;
     z-index: 1;
     background-color: white;
+}
+.dropDownDashboard{
+    display: none;
+}
+
+.side-pannel .dropDownDashboardpannel{
+    display: none;
+}
+div .deleteitem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:768px){
+    .side-pannel{
+        display: none;
+    }
+    .newsidepannel{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 100%;
+        background-color: white;
+        z-index: 1;
+        transition: 1s ease-in;
+    }
+    .dropDownDashboard{
+        cursor: pointer;
+        display: flex;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+    .newsidepannel .dropDownDashboardpannel{
+        display: flex;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+    }
+    .data_cardscore{
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .questionansercard{
+        max-height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 0px 2px 0px gray;
+        border-radius: 5px;
+        margin-top: 50px;
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 30px;
+        max-width: 90%;
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+    .data_card{
+        height: 300px;
+        width: 80%;
+        box-shadow: 0px 0px 2px gray;
+        position: absolute;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    
+    }
 }

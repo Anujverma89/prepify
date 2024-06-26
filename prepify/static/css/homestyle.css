@@ -1,6 +1,10 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
     font-family: "IBM-Plex-Sans", sans-serif;
-    /* overflow: hidden; */
     margin: 0;
     display: flex;
     justify-content: center;
@@ -25,7 +29,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin-right: 0.5rem;
-    /* margin-left: 0.25rem; */
 }
 
 .main-content {
@@ -212,6 +215,11 @@ a {
     box-shadow: 0px 0px 2px 0px;
     margin-bottom: 50px;
 }
+.aboutUs ul li{
+    width: 100%;
+    list-style-position: outside;
+    list-style-type: square;
+}
 
 .contactUs{
     width: 90%;
@@ -231,6 +239,7 @@ a {
     width: 90%;
     box-sizing: border-box;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 50px;
@@ -243,9 +252,325 @@ a {
     padding: 30px;
     height: 200px;
     width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .hrrow{
     height: 2px;
     width: 100%;
     background-color: black;
 }
+.mobile_navigation{
+    display: none;
+}
+
+@media screen and (max-width: 320px){
+    .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: fit-content;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0px;
+    }
+    .side-bar{
+       display: none;
+    }
+
+    .side-bar .navigation .logo{
+        margin-top: 0px;
+        padding: 0px;
+        height: 100px;
+        width: 100px;
+    }
+    .mobile_navigation{
+        background-image: linear-gradient(to right, #011a40, #011e49, #022353, #03275c, #052c66);
+        width: 100%;
+        height: 5vh;
+        position: fixed;
+        top: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0px;
+        padding: 0px;
+        margin-top: 0px;
+        z-index: 1;
+        transition: 1s ease-in;
+    }
+    .mobile_navigation .logo{
+        display: none;
+    }
+    .mobile_navigation .navigationSection{
+        display: none;
+    }
+
+    .mobile_navigation .goup{
+        display: none;
+    }
+
+    .fullheingNavigation{
+        height: 100vh;
+        transition: 1s ease-in;
+    }
+
+    .fullheingNavigation .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0px;
+        height: 100px;
+        width: 100px;
+    }
+
+    .fullheingNavigation .navigationSection{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 0px;
+        padding: 0px;
+    }
+    .fullheingNavigation .dropDown{
+        display: none;
+    }
+    .fullheingNavigation .goup{
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        right: 48%;
+        transition: 1s ease-in;
+    }
+
+    .main-content {
+        background-image: linear-gradient(to right bottom, #b8d4ff, #bed5f9, #c4d6f3, #c9d7ec, #cfd8e6);
+        border-radius: 0px;
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .acc-options{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .top-bar{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .welcome-section{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+        background-color: none;
+        background-image: none;
+    }
+    .textual-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: none;
+        flex-direction: column;
+        background-image:none;
+        margin-left: 0rem;
+    }
+    .textual-info p{
+        color: black;
+    }
+    .take-test-btn{
+        margin:0px;
+        margin-bottom: 10px;
+    }
+    .name-of-site{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .site-name{
+        margin-top: 10px;
+        font-size: 2rem;
+    }
+}
+
+
+@media screen and (min-width:321px) and (max-width: 768px){
+    .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: fit-content;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0px;
+    }
+    .side-bar{
+       display: none;
+    }
+
+    .side-bar .navigation .logo{
+        margin-top: 0px;
+        padding: 0px;
+        height: 100px;
+        width: 100px;
+    }
+    .mobile_navigation{
+        background-image: linear-gradient(to right, #011a40, #011e49, #022353, #03275c, #052c66);
+        width: 100%;
+        height: 5vh;
+        position: fixed;
+        top: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0px;
+        padding: 0px;
+        margin-top: 0px;
+        z-index: 1;
+        transition: 1s ease-in;
+    }
+    .mobile_navigation .logo{
+        display: none;
+    }
+    .mobile_navigation .navigationSection{
+        display: none;
+    }
+
+    .mobile_navigation .goup{
+        display: none;
+    }
+
+    .fullheingNavigation{
+        height: 100vh;
+        transition: 1s ease-in;
+    }
+
+    .fullheingNavigation .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0px;
+        height: 100px;
+        width: 100px;
+    }
+
+    .fullheingNavigation .navigationSection{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 0px;
+        padding: 0px;
+    }
+    .fullheingNavigation .dropDown{
+        display: none;
+    }
+    .fullheingNavigation .goup{
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        right: 48%;
+        transition: 1s ease-in;
+    }
+
+    .main-content {
+        background-image: linear-gradient(to right bottom, #b8d4ff, #bed5f9, #c4d6f3, #c9d7ec, #cfd8e6);
+        border-radius: 0px;
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    /* .acc-options{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    */
+    .top-bar{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    } 
+    .welcome-section{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+        background-color: none;
+        background-image: none;
+    }
+    .textual-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: none;
+        flex-direction: column;
+        background-image:none;
+        margin-left: 0rem;
+    }
+    .textual-info p{
+        color: black;
+    }
+    .take-test-btn{
+        margin:0px;
+        margin-bottom: 10px;
+    }
+    .name-of-site{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+
+/* 0 < small devies < 320px 
+ 320 < medim < 768px
+large > 769px
+
+
+
+*/
+
+/* start of desktop styles 
+@media screen and (max-width: 991px) {
+    /* start of large tablet styles 
+    
+    }
+    
+    @media screen and (max-width: 767px) {
+    start of medium tablet styles
+    
+    }
+    
+    @media screen and (max-width: 479px) {
+    start of phone styles 
+    
+    }
+*/

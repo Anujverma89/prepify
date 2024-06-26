@@ -81,37 +81,42 @@ function openTest(cur){
 
 let chunk =[];
 function recordVideo(){
-    if(StopNow === 1){
-        window.location.reload();
-    }
-    let mikeIcon = document.getElementById("mikeIcon");
-    mikeIcon.classList.add("listeningIcong");
-    let startReco = document.getElementById("record-answer");
-    startReco.innerText="Recording";
-    let hiddenbutton = document.getElementById("stop-recording");
-    hiddenbutton.hidden=false;
-    const options = {
-        audioBitsPerSecond: 128000,
-        videoBitsPerSecond: 2500000,
-        mimeType: 'video/webm',
-      };
-    mediaRec = new MediaRecorder(videostream ,options);
-   
-    mediaRec.ondataavailable = (e) => {
-        chunk.push(e.data);
-    };
-    recognition.start();
-    mediaRec.start();
-
-    setInterval(()=>{
-        let sec = document.getElementById("second");
-        sec.innerText = ++second;
-        if(second === 60){
-            second=0;
-            let minu = document.getElementById("minute");
-            minu.innerText = ++min;
+    if(document.getElementById("contextinput").value === " "){
+        alert("Sorry !!  You have not selected any questions");
+    }else{
+        if(StopNow === 1){
+            window.location.reload();
         }
-    },1000)
+        let mikeIcon = document.getElementById("mikeIcon");
+        mikeIcon.classList.add("listeningIcong");
+        let startReco = document.getElementById("record-answer");
+        startReco.innerText="Recording";
+        let hiddenbutton = document.getElementById("stop-recording");
+        hiddenbutton.hidden=false;
+        const options = {
+            audioBitsPerSecond: 128000,
+            videoBitsPerSecond: 2500000,
+            mimeType: 'video/webm',
+        };
+        mediaRec = new MediaRecorder(videostream ,options);
+    
+        mediaRec.ondataavailable = (e) => {
+            chunk.push(e.data);
+        };
+        recognition.start();
+        mediaRec.start();
+
+        setInterval(()=>{
+            let sec = document.getElementById("second");
+            sec.innerText = ++second;
+            if(second === 60){
+                second=0;
+                let minu = document.getElementById("minute");
+                minu.innerText = ++min;
+            }
+        },1000)    
+    }
+
     
 }
 
@@ -155,15 +160,51 @@ function startProcessing(){
 
 function loginWhileTest(){
     let output = document.getElementById('output');
-    let context = document.getElementById("question");
-    var selectedIndex = context.selectedIndex;
-    var selectedOption = context.options[selectedIndex];
-    var selectedcontext = selectedOption.label;
+    // let context = document.getElementById("question");
+    let contextInput = document.getElementById("contextinput");
+    // var selectedIndex = context.selectedIndex;
+    // var selectedOption = context.options[selectedIndex];
+    // var selectedcontext = selectedOption.label;
     window.localStorage.setItem("AnswerText",output.innerText);
-    window.localStorage.setItem("context",selectedcontext);
+    window.localStorage.setItem("context",contextInput.value);
     window.open("/login");
 }
 
 function exitSelection(){
     window.location.href="/"
+}
+
+function addQuestion(){
+    document.getElementById("addQuestionDiv").classList.toggle("addQuestionDiv");
+}
+
+function saveFormData(event){
+    event.preventDefault();
+    let formd = document.getElementById("addquestionfrom");
+    // let formdata = new FormData("formdata",formd.addquestion.value);
+    let formdata = new FormData(formd);
+    let url= "/savequestion";
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = ()=>{
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log(xhr.responseText);
+                alert("Qestion Saved Sucessfully <br> Reloading to reflect changes")
+                window.location.reload();
+            }else{
+                console.log(xhr.responseText);
+            }
+        }
+    }
+    xhr.send(formdata);
+}
+
+
+function updateContext(curdiv){
+    let contextInput = document.getElementById("contextinput");
+    let contextvalue = curdiv.innerText;
+    contextInput.value = contextvalue;
+    let contextInput1 = document.getElementById("contextinput");
+    console.log(contextInput1.value);
 }
