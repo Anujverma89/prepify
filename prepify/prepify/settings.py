@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,8 +25,11 @@ SECRET_KEY = "django-insecure-%n3tig5u=q6uftx$e28y4+vg!r-rt%qr^s5y+=j))9n1ldcc5i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'prepify.settings')
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ["*"]
 
 # AUTH_USER_MODEL = "main.CustomUser"
 
@@ -57,6 +61,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": ["templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
