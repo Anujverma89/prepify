@@ -36,6 +36,28 @@ function checkPassword(){
     }
 }
 
+window.onload = ()=>{
+    let msgbox = document.getElementById("messagebox");
+    let current = document.getElementById("whichcurrent").innerText;
+    let textbox = document.getElementById("clicktoopentext");
+    let loginform = document.getElementById("LoginForm");
+    let signupform = document.getElementById("SignupForm");
+    console.log(current);
+    if(current === "login"){
+        textbox.innerText="Singup";
+        loginform.classList.remove("hidden_form");
+        signupform.classList.add("hidden_form");
+        currentForm = "login";
+    }else if(current === "signup"){
+        textbox.innerText = "Login"
+        loginform.classList.add("hidden_form");
+        signupform.classList.remove("hidden_form");
+        currentForm = "signup";
+    }
+}
+
+
+
 
 
 // document.addEventListener("DOMContentLoaded",()=>{

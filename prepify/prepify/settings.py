@@ -85,7 +85,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "prepify",
         "USER": "root",
-        "PASSWORD":"",
+        "PASSWORD":"anuj@9797",
         "HOST": "localhost",
         "PORT":3306,
     }

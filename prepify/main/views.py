@@ -50,7 +50,7 @@ def loginf(request):
                 return redirect("home")
         else:
             mess="Username or password is wrong"
-            return render(request,"auth.html",{"message":mess})
+            return render(request,"auth.html",{"message":mess,"current":"login"})
     else:
         referer = request.META.get('HTTP_REFERER')
         endpt = referer.split("/")
@@ -58,9 +58,9 @@ def loginf(request):
         print(refpt)
         mess=" "
         if(refpt == "taketest"):
-            return render(request,"auth.html",{"message":mess})
+            return render(request,"auth.html",{"message":mess, "current":"login"})
         else:
-            return render(request,"auth.html",{"message":mess})
+            return render(request,"auth.html",{"message":mess, "current":"login"})
 
 
 def signup(request):
@@ -75,7 +75,7 @@ def signup(request):
         checkvalue = None
         if "checkvalue" in request.POST:
             checkvalue = request.POST["checkvalue"]
-        isUser = User.objects.filter(username='johndoe').exists()
+        isUser = User.objects.filter(username=name).exists()
         if not isUser :
             if (password != cpass):
                 mess = "Password and confirm doesnot matches"
@@ -94,8 +94,8 @@ def signup(request):
                 else:
                     return redirect("login")
         else:
-            mess = "User name already exists Choose new one"
-            return render(request,"auth.html",{"message":mess})
+            mess = "User name already exists Choose new username"
+            return render(request,"auth.html",{"message":mess,"current":"signup"})
 
     else:
         return HttpResponse("This route is blocked")
